@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import ITodo from "../../../interfaces/ITodo";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 interface Props {
   todos: ITodo[];
 }
 
 export default function TodosGrid({ todos }: Props) {
-  console.log(todos);
+  const [value, setValue] = useState<ITodo | null>(null);
   return (
     <div>
+      <Autocomplete
+      options={todos}
+      getOptionLabel={(option: ITodo) => option.title}
+      value={value}
+      onChange={(event, newValue) => setValue(newValue)}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Choose a task"
+          variant="outlined"
+        />
+      )}
+    />
       <div className="row">
         {todos.map((todo, index) => {
           return (
