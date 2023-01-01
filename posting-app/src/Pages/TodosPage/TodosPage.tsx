@@ -1,20 +1,22 @@
-import IPost from "../../interfaces/IPost";
+import TodosGrid from "./components/TodosGrid";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUserById } from "../../services/usersService";
 import Spinner from "react-bootstrap/Spinner";
 import { getTodos } from "../../services/todosServices";
-import TodosGrid from "./components/TodosGrid";
+import ITodo from "../../interfaces/ITodo";
 
 export default function TodosPage() {
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
 
   const [todos, setTodos] = useState([]);
-  const [userName, setUserName] = useState("");
 
   const calculateTodos = () => {
-    return todos.filter((post: IPost) => post.userId == userId);
+    if (userId) {
+      return todos.filter((todo: ITodo) => todo.userId == userId);
+    }
+    return todos;
   };
 
   useEffect(() => {
@@ -23,19 +25,13 @@ export default function TodosPage() {
       setTodos(tempTodos);
     };
 
-    const fatchUserId = async () => {
-      const tempName = await getUserById(userId);
-      setUserName(tempName.name);
-    };
-
     fatchTodos();
-    fatchUserId();
   }, [userId]);
 
   return (
     <div>
       {todos.length > 0 ? (
-        <TodosGrid />
+        <TodosGrid todos={calculateTodos()} />
       ) : (
         <div className="d-flex justify-content-center">
           <Spinner animation="border" variant="info" />

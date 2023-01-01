@@ -9,6 +9,7 @@ import Modal from "react-modal";
 import IComment from "../../../interfaces/IComment";
 import { stringify } from "querystring";
 import { getUserById } from "../../../services/usersService";
+import Spinner from "react-bootstrap/Spinner";
 
 interface Props {
   posts: IPost[];
@@ -64,6 +65,7 @@ const PostsGrid = ({ posts, name }: Props) => {
     };
 
     const getNames = async () => {
+      console.log(123)
       const tempNames = await Promise.all(
         posts.map(async (post) => {
           const { userId } = await getPostById(post.id);
@@ -77,16 +79,18 @@ const PostsGrid = ({ posts, name }: Props) => {
       setNames(tempNames);
     };
 
+    console.log(name)
+
     fetchCommentsPure();
     fetchComments();
     if (!name) {
       getNames();
     }
-  }, [posts]);
+  }, [posts, name]);
 
   return (
     <div className="row mt-4 ms-4">
-      {names.length > 0 &&
+      {names.length > 0 ? (
         posts.map((post) => {
           const postComments = comments.find((c) => c.id === post.id);
           return (
@@ -119,7 +123,12 @@ const PostsGrid = ({ posts, name }: Props) => {
               </div>
             </div>
           );
-        })}
+        })
+      ) : (
+        <div className="d-flex justify-content-center">
+          <Spinner animation="border" variant="info" />
+        </div>
+      )}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
