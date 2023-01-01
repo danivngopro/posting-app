@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom";
 import IPost from "../../../interfaces/IPost";
+import ITodo from "../../../interfaces/ITodo";
 import IUser from "../../../interfaces/IUser";
 
 interface Props {
   users: IUser[];
   posts: IPost[];
+  todos: ITodo[];
 }
 
-const UserGrid = ({ users, posts }: Props) => {
+const UserGrid = ({ users, posts, todos }: Props) => {
 
   const calculatePosts = (userId: string) => {
     return posts.filter((post: IPost) => post.userId === userId).length;
+  };
+
+  const calculateTodos = (userId: string) => {
+    return todos.filter((todo: ITodo) => todo.userId === userId).length;
   };
 
   return (
@@ -36,6 +42,9 @@ const UserGrid = ({ users, posts }: Props) => {
               </div>
               <Link to={`/Posts/${user.id}`} className="card-link">
                 Posts: {calculatePosts(user.id)}
+              </Link>
+              <Link to={`/Todos/${user.id}`} className="card-link">
+                Todos: {calculateTodos(user.id)}
               </Link>
             </div>
           </div>

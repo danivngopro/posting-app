@@ -6,9 +6,21 @@ export const getPosts = async () => {
   return data;
 };
 
-export const getPostComments = async (postId: number) => {
+export const getPostById = async (postId: string) => {
+  const { data } = await axios.get(`${config.posts.postsConnectionString}/${postId}`);
+  return data;
+};
+
+export const getPostCommentsLength = async (postId: number) => {
   const { data } = await axios.get(
     `${config.posts.postsConnectionString}/${postId}/comments`
   );
   return data.length;
+};
+
+export const getPostComments = async (postId: number) => {
+  const { data } = await axios.get(
+    `${config.posts.postsConnectionString}/${postId}/comments`
+  );
+  return data;
 };

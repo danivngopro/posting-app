@@ -1,46 +1,41 @@
 import IPost from "../../interfaces/IPost";
-import PostsGrid from "./components/PostsGrid";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getPosts } from "../../services/postsService";
 import { getUserById } from "../../services/usersService";
 import Spinner from "react-bootstrap/Spinner";
+import { getTodos } from "../../services/todosServices";
+import TodosGrid from "./components/TodosGrid";
 
-export default function PostsPage() {
+export default function TodosPage() {
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
 
-  const [posts, setPosts] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [userName, setUserName] = useState("");
 
-  const calculatePosts = () => {
-    if (userId) {
-      return posts.filter((post: IPost) => post.userId == userId);
-    }
-    return posts;
+  const calculateTodos = () => {
+    return todos.filter((post: IPost) => post.userId == userId);
   };
 
   useEffect(() => {
-    const fatchPosts = async () => {
-      const tempPosts = await getPosts();
-      setPosts(tempPosts);
+    const fatchTodos = async () => {
+      const tempTodos = await getTodos();
+      setTodos(tempTodos);
     };
 
     const fatchUserId = async () => {
-      if (userId) {
-        const tempName = await getUserById(userId);
-        setUserName(tempName.name);
-      }
+      const tempName = await getUserById(userId);
+      setUserName(tempName.name);
     };
 
-    fatchPosts();
+    fatchTodos();
     fatchUserId();
   }, [userId]);
 
   return (
     <div>
-      {posts.length > 0 ? (
-        <PostsGrid posts={calculatePosts()} name={userName} />
+      {todos.length > 0 ? (
+        <TodosGrid />
       ) : (
         <div className="d-flex justify-content-center">
           <Spinner animation="border" variant="info" />
