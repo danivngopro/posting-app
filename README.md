@@ -12,10 +12,6 @@
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/danivngopro/posting-app?color=56BEB8">
 
-  `<img alt="Github language count" src="https://img.shields.io/github/languages/count/danivngopro/posting-app?color=56BEB8">`
-
-  `<img alt="Repository size" src="https://img.shields.io/github/repo-size/danivngopro/posting-app?color=56BEB8">`
-
 
 </p>
 
@@ -87,4 +83,4 @@ $ npm start
 # The server will initialize in the <http://localhost:3000>
 ```
 
-`<a href="#top">`Back to top`</a>`
+`<a href="#top">`Back to top `</a>`
