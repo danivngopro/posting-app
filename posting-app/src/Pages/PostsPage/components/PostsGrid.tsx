@@ -65,7 +65,6 @@ const PostsGrid = ({ posts, name }: Props) => {
     };
 
     const getNames = async () => {
-      console.log(123)
       const tempNames = await Promise.all(
         posts.map(async (post) => {
           const { userId } = await getPostById(post.id);
@@ -79,8 +78,6 @@ const PostsGrid = ({ posts, name }: Props) => {
       setNames(tempNames);
     };
 
-    console.log(name)
-
     fetchCommentsPure();
     fetchComments();
     if (!name) {
@@ -90,7 +87,7 @@ const PostsGrid = ({ posts, name }: Props) => {
 
   return (
     <div className="row mt-4 ms-4">
-      {names.length > 0 ? (
+      {names.length > 0 || name ? (
         posts.map((post) => {
           const postComments = comments.find((c) => c.id === post.id);
           return (
