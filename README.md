@@ -40,15 +40,15 @@ This project a simple example of front-end development client with axios request
 the backend in this project is simulated using https://jsonplaceholder.typicode.com/
 
 ## ✨ Features
-
-✔️ watch details about all users.
-✔️ watch details about all the posts a user had made;
-✔️ watch all comments about a certain post;
-✔️ watch all todos a user has created;
-✔️ search for todos;
-✔️ complete an uncompleted todo;
-✔️ watch all posts;
-✔️ watch all todos;
+<p align="left">
+✔️ watch details about all users.<br>
+✔️ watch details about all the posts a user had made<br>
+✔️ watch all comments about a certain post<br>
+✔️ watch all todos a user has created<br>
+✔️ search for todos<br>
+✔️ complete an uncompleted todo<br>
+✔️ watch all posts<br>
+✔️ watch all todos</p>
 
 ## 🚀 Technologies
 
