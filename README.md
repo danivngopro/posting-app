@@ -28,8 +28,7 @@
   <a href="#sparkles-features">Features</a>   |  
   <a href="#rocket-technologies">Technologies</a>   |  
   <a href="#white_check_mark-requirements">Requirements</a>   |  
-  <a href="#checkered_flag-starting">Starting</a>   |  
-  <a href="#memo-license">License</a>   |  
+  <a href="#checkered_flag-starting">Starting</a>   |    
   <a href="https://github.com/danivngopro" target="_blank">Author</a>
 </p>
 
