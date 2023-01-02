@@ -9,23 +9,31 @@ interface Props {
 
 export default function TodosGrid({ todos }: Props) {
   const [value, setValue] = useState<ITodo | null>(null);
+  const [filteredTodos, setFilteredTodos] = useState<ITodo[]>(todos);
+
+  const handleChnage = (newValue: string) => {
+    setFilteredTodos(todos.filter((todo) => todo.title.includes(newValue)));
+  };
+
   return (
-    <div>
-      <Autocomplete
-      options={todos}
-      getOptionLabel={(option: ITodo) => option.title}
-      value={value}
-      onChange={(event, newValue) => setValue(newValue)}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Choose a task"
-          variant="outlined"
+    <div style={{ marginTop: "2rem" }}>
+      <div className="d-flex justify-content-center mb-4">
+        <Autocomplete
+          sx={{ width: "500px" }}
+          options={todos}
+          getOptionLabel={(option: ITodo) => option.title}
+          value={value}
+          onChange={(event, newValue) => setValue(newValue)}
+          onInputChange={(event, newValue) => {
+            handleChnage(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Choose a task" variant="outlined" />
+          )}
         />
-      )}
-    />
+      </div>
       <div className="row">
-        {todos.map((todo, index) => {
+        {filteredTodos.map((todo, index) => {
           return (
             <div
               className="col-md-3 col-sm-6 col-12 mb-4"
